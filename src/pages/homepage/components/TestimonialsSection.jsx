@@ -119,7 +119,7 @@ const TestimonialsSection = ({ currentLanguage }) => {
             >
               <Button
                 variant="primary"
-                onClick={() => navigate('/signup')}
+                onClick={() => navigate('/authentication-modal')}
                 iconName="ArrowRight"
                 iconPosition="right"
                 className="w-full sm:w-auto px-8 py-4 text-lg font-semibold"
