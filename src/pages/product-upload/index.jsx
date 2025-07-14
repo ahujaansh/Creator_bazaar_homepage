@@ -209,7 +209,7 @@ const ProductUpload = () => {
         </motion.div>
       )}
       
-      <main className="pt-20 pb-12">
+      <main className="pt-20 pb-0">
         <div className="max-w-4xl mx-auto container-responsive">
           {/* Page Header */}
           <div className="text-center mb-8">

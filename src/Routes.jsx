@@ -10,7 +10,7 @@ import CreateProductPage from "pages/create-product";
 import AuthenticationModal from "pages/authentication-modal";
 import ProductDetailPage from "pages/product-detail-page";
 import ProductUpload from "pages/product-upload";
-import PricingPage from "pages/pricing";
+// import PricingPage from "pages/pricing";
 import HelpPage from "pages/help";
 import ContactPage from "pages/contact";
 import ExplorePage from "pages/explore";
@@ -35,9 +35,9 @@ const Routes = () => {
         <Route path="/product-detail-page" element={<ProductDetailPage />} />
         <Route path="/product-detail-page/:id" element={<ProductDetailPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route path="/product-upload" element={<ProductUpload />} />
+        { <Route path="/product-upload" element={<ProductUpload />} /> }
         <Route path="/upload-product" element={<ProductUpload />} />
-        <Route path="/pricing" element={<PricingPage />} />
+        {/* <Route path="/pricing" element={<PricingPage />} /> */}
         <Route path="/help" element={<HelpPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/explore" element={<ExplorePage />} />

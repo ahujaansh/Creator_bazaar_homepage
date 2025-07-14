@@ -6,6 +6,7 @@ import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 
+
 const ExplorePage = () => {
   const navigate = useNavigate();
   const [currentLanguage, setCurrentLanguage] = useState('en');
@@ -45,7 +46,7 @@ const ExplorePage = () => {
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Header />
       
-      <main className="pt-20 pb-12">
+      <main className="pt-20 pb-0">
         <div className="container-responsive">
           {/* Page Header */}
           <div className="text-center mb-12">
@@ -160,7 +161,7 @@ const ExplorePage = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   variant="primary"
-                  onClick={() => navigate('/product-upload')}
+                  onClick={() => navigate('/authentication-modal')}
                   iconName="Upload"
                   iconPosition="left"
                   className="bg-primary hover:bg-primary-600"

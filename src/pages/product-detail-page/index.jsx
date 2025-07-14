@@ -186,7 +186,7 @@ const ProductDetailPage = () => {
       <div className="min-h-screen bg-background">
         <Header />
         
-        <main className="pt-20 pb-12">
+        <main className="pt-20 pb-0">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Breadcrumb product={mockProduct} currentLanguage={currentLanguage} />
             

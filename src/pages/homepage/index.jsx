@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '../../components/ui/Header';
-import MobileNavigation from '../../components/ui/MobileNavigation';
 import HeroSection from './components/HeroSection';
 import WhyCreatorsChoose from './components/WhyCreatorsChoose';
 import ProductCategories from './components/ProductCategories';
@@ -69,7 +68,7 @@ const Homepage = () => {
       <div className="min-h-screen bg-background transition-colors duration-300">
         <Header />
         
-        <main className="pt-16 pb-20 md:pb-0">
+        <main className="pt-16 pb-0 md:pb-0">
           <HeroSection currentLanguage={currentLanguage} />
           <WhyCreatorsChoose currentLanguage={currentLanguage} />
           <ProductCategories currentLanguage={currentLanguage} />
@@ -80,7 +79,6 @@ const Homepage = () => {
 
         <Footer currentLanguage={currentLanguage} />
         <FloatingFeedback currentLanguage={currentLanguage} />
-        <MobileNavigation />
       </div>
     </>
   );

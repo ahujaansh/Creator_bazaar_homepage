@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import Header from '../../components/ui/Header';
-import MobileNavigation from '../../components/ui/MobileNavigation';
 import Icon from '../../components/AppIcon';
 
 const PrivacyPage = () => {
@@ -127,7 +126,7 @@ const PrivacyPage = () => {
       <div className="min-h-screen bg-background">
         <Header />
         
-        <main className="pt-20 pb-20 md:pb-8">
+        <main className="pt-20 pb-0 md:pb-0">
           <div className="container-responsive">
             <div className="max-w-4xl mx-auto">
               <motion.div
@@ -193,7 +192,6 @@ const PrivacyPage = () => {
           </div>
         </main>
 
-        <MobileNavigation />
       </div>
     </>
   );

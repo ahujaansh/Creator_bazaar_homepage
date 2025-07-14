@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import Header from '../../components/ui/Header';
-import MobileNavigation from '../../components/ui/MobileNavigation';
 import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
@@ -176,7 +175,7 @@ const CreateProductPage = () => {
       <div className="min-h-screen bg-background">
         <Header />
         
-        <main className="pt-20 pb-20 md:pb-8">
+        <main className="pt-20 pb-0 md:pb-0">
           <div className="container-responsive">
             <div className="max-w-2xl mx-auto">
               <motion.div
@@ -381,7 +380,6 @@ const CreateProductPage = () => {
           </div>
         </main>
 
-        <MobileNavigation />
       </div>
     </>
   );
