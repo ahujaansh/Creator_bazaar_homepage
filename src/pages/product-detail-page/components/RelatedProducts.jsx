@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from '../../../components/AppIcon';
-
 import Button from '../../../components/ui/Button';
+import AddToCartButton from '../../../components/ui/AddToCartButton';
 
 const RelatedProducts = ({ products, currentLanguage, onProductClick }) => {
   const formatPrice = (price) => {
@@ -71,6 +71,30 @@ const RelatedProducts = ({ products, currentLanguage, onProductClick }) => {
                   <div className="text-sm font-bold text-primary">
                     {formatPrice(product.price)}
                   </div>
+                </div>
+                
+                <div className="mt-3 flex items-center justify-between">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onProductClick(product.id);
+                    }}
+                    className="text-xs px-2 py-1"
+                  >
+                    {currentLanguage === 'hi' ? 'देखें' : 'View'}
+                  </Button>
+                  
+                  <AddToCartButton
+                    product={product}
+                    variant="outline"
+                    size="sm"
+                    className="text-xs px-2 py-1"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {currentLanguage === 'hi' ? 'कार्ट' : 'Cart'}
+                  </AddToCartButton>
                 </div>
               </div>
             </div>

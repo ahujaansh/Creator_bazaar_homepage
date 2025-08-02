@@ -18,6 +18,7 @@ import TermsPage from "pages/terms";
 import PrivacyPage from "pages/privacy";
 import RefundsPage from "pages/refunds";
 import NotFound from "pages/NotFound";
+import CartDemoPage from "pages/cart-demo";
 
 const Routes = () => {
   return (
@@ -47,6 +48,7 @@ const Routes = () => {
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/refunds" element={<RefundsPage />} />
+        <Route path="/cart-demo" element={<CartDemoPage />} />
         <Route path="*" element={<NotFound />} />
       </RouterRoutes>
       </ErrorBoundary>

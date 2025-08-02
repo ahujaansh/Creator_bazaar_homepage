@@ -1,6 +1,7 @@
 import React from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+import AddToCartButton from '../../../components/ui/AddToCartButton';
 
 const PricingCard = ({ product, currentLanguage, onPurchase }) => {
   const formatPrice = (price) => {
@@ -60,16 +61,27 @@ const PricingCard = ({ product, currentLanguage, onPurchase }) => {
         </div>
       </div>
 
-      <Button
-        variant="primary"
-        fullWidth
-        onClick={onPurchase}
-        iconName="ShoppingCart"
-        iconPosition="left"
-        className="mb-4 text-lg py-4 glow-effect hover:shadow-xl transition-all duration-300"
-      >
-        {currentLanguage === 'hi' ? 'अभी खरीदें' : 'Buy Now'}
-      </Button>
+      <div className="space-y-3">
+        <AddToCartButton
+          product={product}
+          variant="outline"
+          fullWidth
+          className="text-lg py-4 border-primary text-primary hover:bg-primary-50"
+        >
+          {currentLanguage === 'hi' ? 'कार्ट में जोड़ें' : 'Add to Cart'}
+        </AddToCartButton>
+        
+        <Button
+          variant="primary"
+          fullWidth
+          onClick={onPurchase}
+          iconName="Zap"
+          iconPosition="left"
+          className="text-lg py-4 glow-effect hover:shadow-xl transition-all duration-300"
+        >
+          {currentLanguage === 'hi' ? 'अभी खरीदें' : 'Buy Now'}
+        </Button>
+      </div>
 
       <div className="text-center">
         <p className="text-xs text-text-tertiary mb-2">

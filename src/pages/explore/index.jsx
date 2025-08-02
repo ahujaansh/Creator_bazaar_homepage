@@ -5,6 +5,7 @@ import Header from '../../components/ui/Header';
 import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
+import AddToCartButton from '../../components/ui/AddToCartButton';
 
 
 const ExplorePage = () => {
@@ -13,6 +14,134 @@ const ExplorePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('popular');
+
+  // Sample products data
+  const sampleProducts = [
+    {
+      id: "1",
+      name: "Complete Digital Marketing Course 2024",
+      price: 1999,
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+      category: "courses",
+      description: "Master digital marketing with comprehensive strategies for Indian market.",
+      views: 15420,
+      rating: 4.8,
+      creator: "Priya Sharma"
+    },
+    {
+      id: "2",
+      name: "Notion Productivity Templates Bundle",
+      price: 499,
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      category: "templates",
+      description: "50+ professional Notion templates for productivity and organization.",
+      views: 3200,
+      rating: 4.6,
+      creator: "Rahul Gupta"
+    },
+    {
+      id: "3",
+      name: "Social Media Content Calendar 2024",
+      price: 799,
+      image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=300&fit=crop",
+      category: "templates",
+      description: "Complete content calendar with 365 days of content ideas.",
+      views: 2100,
+      rating: 4.7,
+      creator: "Sneha Patel"
+    },
+    {
+      id: "4",
+      name: "Email Marketing Automation Guide",
+      price: 1299,
+      image: "https://images.unsplash.com/photo-1557838923-2985c318be48?w=400&h=300&fit=crop",
+      category: "ebooks",
+      description: "Complete guide to email marketing automation for businesses.",
+      views: 5600,
+      rating: 4.9,
+      creator: "Amit Kumar"
+    },
+    {
+      id: "5",
+      name: "Logo Design Toolkit",
+      price: 899,
+      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop",
+      category: "graphics",
+      description: "Professional logo design templates and resources.",
+      views: 4300,
+      rating: 4.5,
+      creator: "Kavya Singh"
+    },
+    {
+      id: "6",
+      name: "SEO Audit Checklist",
+      price: 399,
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      category: "tools",
+      description: "Comprehensive SEO audit checklist for website optimization.",
+      views: 1800,
+      rating: 4.4,
+      creator: "Arjun Mehta"
+    },
+    {
+      id: "7",
+      name: "Video Editing Masterclass",
+      price: 2499,
+      image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=300&fit=crop",
+      category: "courses",
+      description: "Learn professional video editing from scratch to advanced techniques.",
+      views: 8900,
+      rating: 4.9,
+      creator: "Vikram Singh"
+    },
+    {
+      id: "8",
+      name: "Business Plan Template Pack",
+      price: 699,
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      category: "templates",
+      description: "Complete business plan templates for startups and entrepreneurs.",
+      views: 2700,
+      rating: 4.6,
+      creator: "Neha Sharma"
+    }
+  ];
+
+  // Filter and sort products
+  const filteredProducts = sampleProducts.filter(product => {
+    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         product.creator.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch (sortBy) {
+      case 'recent':
+        return new Date(b.uploadDate || '2024-01-01') - new Date(a.uploadDate || '2024-01-01');
+      case 'price-low':
+        return a.price - b.price;
+      case 'price-high':
+        return b.price - a.price;
+      case 'popular':
+      default:
+        return b.views - a.views;
+    }
+  });
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
+  const handleProductClick = (productId) => {
+    navigate(`/product-detail-page/${productId}`);
+  };
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language') || 'en';
@@ -135,85 +264,110 @@ const ExplorePage = () => {
             </div>
           </motion.div>
 
-          {/* Coming Soon Message */}
+          {/* Products Grid */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-center py-20"
+            className="mb-8"
           >
-            <div className="max-w-2xl mx-auto">
-              <div className="w-24 h-24 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-8">
-                <Icon name="Rocket" size={48} color="white" strokeWidth={2} />
-              </div>
-              
-              <h2 className="text-3xl font-bold text-primary mb-4">
-                {currentLanguage === 'hi' ? 'जल्द आ रहा है!' : 'Coming Soon!'}
-              </h2>
-              
-              <p className="text-lg text-text-secondary mb-8">
+            {/* Results Count */}
+            <div className="flex items-center justify-between mb-6">
+              <p className="text-sm text-text-secondary">
                 {currentLanguage === 'hi' 
-                  ? 'हम जल्द ही अद्भुत डिजिटल उत्पादों से भरा मार्केटप्लेस लॉन्च कर रहे हैं। बीटा लॉन्च के लिए साइन अप करें।'
-                  : 'We\'re launching a marketplace full of amazing digital products soon. Sign up for our beta launch.'
+                  ? `${sortedProducts.length} उत्पाद मिले` 
+                  : `${sortedProducts.length} products found`
                 }
               </p>
+            </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  variant="primary"
-                  onClick={() => navigate('/authentication-modal')}
-                  iconName="Upload"
-                  iconPosition="left"
-                  className="bg-primary hover:bg-primary-600"
-                >
-                  {currentLanguage === 'hi' ? 'पहले बेचना शुरू करें' : 'Start Selling First'}
-                </Button>
-                
-                <Button
-                  variant="outline"
-                  onClick={() => navigate('/authentication-modal')}
-                  iconName="Bell"
-                  iconPosition="left"
-                >
-                  {currentLanguage === 'hi' ? 'लॉन्च की सूचना पाएं' : 'Get Launch Notification'}
-                </Button>
-              </div>
-
-              {/* Beta Features */}
-              <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[
-                  {
-                    icon: 'Zap',
-                    title: currentLanguage === 'hi' ? 'तुरंत सेटअप' : 'Instant Setup',
-                    description: currentLanguage === 'hi' ? '5 मिनट में बेचना शुरू करें' : 'Start selling in 5 minutes'
-                  },
-                  {
-                    icon: 'Shield',
-                    title: currentLanguage === 'hi' ? 'सुरक्षित पेमेंट' : 'Secure Payments',
-                    description: currentLanguage === 'hi' ? 'UPI के साथ तुरंत पेमेंट' : 'Instant payments with UPI'
-                  },
-                  {
-                    icon: 'Users',
-                    title: currentLanguage === 'hi' ? 'बढ़ता समुदाय' : 'Growing Community',
-                    description: currentLanguage === 'hi' ? 'रचनाकारों का नेटवर्क' : 'Network of creators'
+            {/* Products Grid */}
+            {sortedProducts.length === 0 ? (
+              <div className="text-center py-20">
+                <Icon name="Search" size={48} className="text-text-tertiary mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-text-primary mb-2">
+                  {currentLanguage === 'hi' ? 'कोई उत्पाद नहीं मिला' : 'No products found'}
+                </h3>
+                <p className="text-text-secondary">
+                  {currentLanguage === 'hi' 
+                    ? 'अपनी खोज को बदलने का प्रयास करें' 
+                    : 'Try changing your search criteria'
                   }
-                ].map((feature, index) => (
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {sortedProducts.map((product, index) => (
                   <motion.div
-                    key={index}
+                    key={product.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                    className="text-center"
+                    transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+                    className="bg-surface rounded-xl border border-border shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group cursor-pointer"
+                    onClick={() => handleProductClick(product.id)}
                   >
-                    <div className="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center mx-auto mb-4">
-                      <Icon name={feature.icon} size={24} className="text-primary" />
+                    {/* Product Image */}
+                    <div className="aspect-video bg-gradient-to-br from-primary-50 to-accent-50 relative overflow-hidden">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                          e.target.src = '/assets/images/no_image.png';
+                        }}
+                      />
+                      <div className="absolute top-3 left-3">
+                        <span className="bg-primary text-primary-foreground px-2 py-1 rounded-full text-xs font-medium">
+                          {product.category}
+                        </span>
+                      </div>
                     </div>
-                    <h3 className="font-semibold text-text-primary mb-2">{feature.title}</h3>
-                    <p className="text-sm text-text-secondary">{feature.description}</p>
+
+                    {/* Product Details */}
+                    <div className="p-4">
+                      <h3 className="font-semibold text-text-primary mb-2 line-clamp-2 group-hover:text-primary transition-colors duration-200">
+                        {product.name}
+                      </h3>
+                      <p className="text-sm text-text-secondary mb-3 line-clamp-2">
+                        {product.description}
+                      </p>
+                      
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center space-x-2 text-xs text-text-tertiary">
+                          <div className="flex items-center space-x-1">
+                            <Icon name="Eye" size={12} />
+                            <span>{product.views.toLocaleString('en-IN')}</span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <Icon name="Star" size={12} className="text-warning fill-current" />
+                            <span>{product.rating}</span>
+                          </div>
+                        </div>
+                        <span className="text-lg font-bold text-primary">
+                          {formatPrice(product.price)}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs text-text-secondary">
+                          by {product.creator}
+                        </p>
+                        
+                        <AddToCartButton
+                          product={product}
+                          variant="outline"
+                          size="sm"
+                          className="text-xs px-3 py-1"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {currentLanguage === 'hi' ? 'कार्ट' : 'Cart'}
+                        </AddToCartButton>
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
               </div>
-            </div>
+            )}
           </motion.div>
         </div>
       </main>

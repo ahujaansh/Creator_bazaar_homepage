@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Icon from '../AppIcon';
 import Button from './Button';
+import CartIcon from './CartIcon';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -124,6 +125,9 @@ item.label === 'Explore'
 
             {/* Desktop Actions */}
             <div className="hidden md:flex items-center space-x-3">
+              {/* Cart Icon */}
+              <CartIcon />
+
               {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
@@ -147,6 +151,9 @@ item.label === 'Explore'
 
             {/* Mobile Actions */}
             <div className="flex md:hidden items-center space-x-2">
+              {/* Mobile Cart Icon */}
+              <CartIcon />
+
               {/* Mobile Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
